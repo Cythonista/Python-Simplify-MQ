@@ -1,5 +1,4 @@
 # Python-Simplify-MQ
-バグありなぜかJsonが逆になっちゃう
 ```
 conda install flask
 ```
@@ -11,7 +10,7 @@ http://localhost:8080/v1/message/list
 
 push(リクエストパラメータ title, text)
 ```
-http://localhost:8080/v1/message/push?title=aaa&text=aaa
+http://localhost:8080/v1/message/push?head=aaa&text=aaa
 ```
 
 consume

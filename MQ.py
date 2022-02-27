@@ -1,10 +1,10 @@
 class MQ(object):
-    def __init__(self, title = None, text = None):
-        self.title = title
-        self.text  = text
+    def __init__(self, head = None, text = None):
+        self.head = head
+        self.text = text
 
-    def getTitle(self):
-        return self.title
+    def getHead(self):
+        return self.head
 
     def getText(self):
         return self.text
