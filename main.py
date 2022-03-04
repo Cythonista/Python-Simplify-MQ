@@ -7,8 +7,9 @@ app.config["JSON_AS_ASCII"] = False
 
 # MQインスタンスを保存する配列
 instanceList = []
+prefix = '/v1/message/'
 
-@app.route('/v1/message/list')
+@app.route(prefix + 'list')
 def list():
     # MQインスタンスから取り出したメッセージを保存するリスト
     values = []
@@ -23,7 +24,7 @@ def list():
     }
     return jsonify(data)
 
-@app.route('/v1/message/push')
+@app.route(prefix + 'push')
 def push():
     if request.args.get('head') is not None:
         head = request.args.get('head')
@@ -35,6 +36,14 @@ def push():
     else:
         text = ''
 
+    if(head == '' or text == ''):
+        data = {
+            'code'  : 400,
+            'msg'   : 'Bad Request'
+        }
+        return jsonify(data)
+
+    # インスタンスリストに格納
     mq = MQ(head, text)
     instanceList.append(mq)
 
@@ -49,7 +58,7 @@ def push():
     }
     return jsonify(data)
 
-@app.route('/v1/message/consume')
+@app.route(prefix + 'consume')
 def consume():
     # MQインスタンスから取り出したメッセージを保存するリスト
     values = []
